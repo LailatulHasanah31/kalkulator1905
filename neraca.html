@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Penunjang Susenas</title>
+    <style>
+        /* Aturan umum untuk tabel */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            width: 50%;
+            padding: 8px;
+            text-align: center; /* Pusatkan secara horizontal */
+            vertical-align: middle; /* Pusatkan secara vertikal */
+            border: 1px solid #ddd;
+        }
+
+        /* Agar teks di header dan sel terlihat jelas */
+        th {
+            background-color: #f2f2f2;
+        }
+
+        h4 {
+            background-color:rgb(142, 221, 140);
+        }
+
+        tr:nth-child(even) {
+            background-color:rgba(242, 242, 242, 0.6); /* Warna untuk baris genap */
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff; /* Warna untuk baris ganjil */
+        }
+
+        /* Responsif: Kolom akan diatur ulang di perangkat mobile */
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            th {
+                background-color: #f9f9f9;
+                font-weight: bold;
+                text-align: center;
+                padding: 10px;
+            }
+
+            td {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                border: none;
+                position: relative;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                top: 10px;
+                font-weight: bold;
+            }
+
+            tr {
+                margin-bottom: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+        }
+
+        /* Notifikasi untuk meminta perubahan orientasi */
+        .orientation-notification {
+            display: none;
+            background-color: #f9e5e5;
+            color: #d9534f;
+            padding: 15px;
+            border: 1px solid #d9534f;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Tampilan saat notifikasi muncul */
+        .show-notification {
+            display: block;
+        }
+
+        .value-input:placeholder-shown {
+            border: 2px solid red;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-next:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Notifikasi orientasi -->
+    <div id="orientationNotification" class="orientation-notification">
+        <p>Untuk pengalaman terbaik, harap putar layar Anda ke mode <strong>landscape</strong>.</p>
+    </div>
+
+    <!-- <h4 style="text-align:center;"><strong>BLOK VI. REKAPITULASI PENERIMAAN DAN PENGELUARAN RUMAH TANGGA SELAMA SETAHUN TERAKHIR (DALAM RUPIAH)</strong></h4> -->
+
+    <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+        <thead>
+            <tr>
+                <th colspan="3" style="background-color: rgb(106, 106, 209);">Blok V.E. TRANSFER BERJALAN (SELAIN ASET) SELAMA SETAHUN TERAKHIR (DALAM RUPIAH)</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th rowspan="2">Penerimaan</th>
+                <th>Transfer Diterima (dari)</th>
+                <th>Transfer Dibayar/Diberikan (kepada)</th>
+            </tr>
+            <tr>
+                <th>Uang</th>
+                <th>Uang</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>(1)</td>
+                <td>(2)</td>
+                <td>(4)</td>
+            </tr>
+
+            <tr class="total" style="background-color: rgb(209, 208, 119);">
+                <td style="width: 33%; text-align: left; padding-left: 3%; border: 1.5px solid black;"><strong>Jumlah (Rincian 1+2+3+4+5)</strong></td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="total_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="total_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+        <thead>
+            <tr>
+                <th colspan="4" style="background-color: rgb(106, 106, 209);">Blok VI. REKAPITULASI PENERIMAAN DAN PENGELUARAN RUMAH TANGGA SELAMA SETAHUN TERAKHIR (DALAM RUPIAH)</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Rincian Penerimaan</th>
+                <th>Nilai</th>
+                <th>Rincian Pengeluaran</th>
+                <th>Nilai</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>(1)</td>
+                <td>(2)</td>
+                <td>(3)</td>
+                <td>(4)</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; width: 25%;">1. Upah dan Gaji<br><strong>[Blok V.A Baris Jumlah Kolom (5)+(6)+(7)]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="1_6penerimaan" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 25%;">1. Pengeluaran Konsumsi Rumah Tangga<br><strong>[Blok   IV.3.3 Rincian 9 Kolom (3) dikali 12]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="1_6pengeluaran" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+
+            </tr>
+            
+            <tr>
+                <td style="text-align: left; width: 25%;">2. Pendapatan/Surplus dari Usaha Rumah Tangga<br><strong>[Blok V.B Baris Jumlah Kolom (7)]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="2_6penerimaan" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 25%;">2. Pendapatan Kepemilikan yang Dibayar<br><strong>[Blok V.D Baris Jumlah Kolom (3)]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="2_6pengeluaran" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: left; width: 25%;">3. Pendapatan/Surplus dari Produksi Rumah Tangga yang Dikonsumsi/Digunakan Sendiri<br><strong>[Blok V.C Baris Jumlah Kolom (4)]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="3_6penerimaan" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 25%;">3. Transfer Berjalan (selain aset) Dibayar<br><strong>[Blok V.E Baris Jumlah Kolom (4)+(5)]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="3_6pengeluaran" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: left; width: 25%;">4. Pendapatan Kepemilikan yang Diterima<br><strong>[Blok V.D Baris Jumlah Kolom (2)]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="4_6penerimaan" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 25%;">4. Transfer Modal/Aset Dibayar<br><strong>[Blok V.F Baris Jumlah Kolom (4)+(5)]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="4_6pengeluaran" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: left; width: 25%;">5. Transfer Berjalan (selain aset) Diterima<br><strong>[Blok V.E Baris Jumlah Kolom (2)+(3)]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="5_6penerimaan" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 25%;">5. Total Aset Neto<br><strong>[Blok V.G Rincian Jumlah Kolom (4)]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="5_6pengeluaran" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: left; width: 25%;">6. Transfer Modal Aset Diterima<br><strong>[Blok V.F Baris Jumlah Kolom (2) + Kolom (3)]</strong></td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="6_6penerimaan" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="background-color: grey;"></td>
+                <td style="background-color: grey;"></td>
+            </tr>
+
+            <tr id="notifikasi_6">
+                <td colspan="4" style="text-align: center; border: 1px solid black; padding: 6px; background-color: #e49b9b;">
+                    <strong>Jika Perhitungan Muncul NaN, Mohon Isi Isian Yang Kosong</strong>
+                </td>
+            </tr>
+
+            <tr class="total" style="background-color: rgb(209, 208, 119);">
+                <td style="width: 25%; text-align: center; border: 1.5px solid black;"><strong>Jumlah</strong></td>
+                <td style="width: 25%; border: 1.5px solid black;" id="jumlah_6penerimaan"></td>
+                <td style="width: 25%; text-align: center; border: 1.5px solid black;"><strong>Jumlah</strong></td>
+                <td style="width: 25%; border: 1.5px solid black;" id="jumlah_6pengeluaran"></td>
+            </tr>
+            
+            <tr class="total" style="background-color: rgb(209, 208, 119);">
+                <td colspan="3" style="width: 25%; text-align: center; border: 1.5px solid black;"><strong>Selisih Penerimaan dan Pengeluaran [Jumlah Kolom (2) - Jumlah Kolom (4)]</strong></td>
+                <td style="width: 25%; border: 1.5px solid black;" id="selisih_6"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+        <thead>
+            <tr>
+                <th colspan="4" style="background-color: rgb(106, 106, 209);">Blok VII. TRANSAKSI KEUANGAN RUMAH TANGGA SELAMA SETAHUN TERAKHIR (DALAM RUPIAH)</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Rincian Penerimaan</th>
+                <th>Nilai</th>
+                <th>Rincian Pengeluaran</th>
+                <th>Nilai</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>(1)</td>
+                <td>(2)</td>
+                <td>(3)</td>
+                <td>(4)</td>
+            </tr>
+            <tr>
+                <td style="text-align: left; width: 25%;">1. Pengambilan Uang Tunai dan Tabungan</td>
+                <td style="width: 25%;" id="1_7penerimaan"></td>
+                <td style="text-align: left; width: 25%;">1. Menyimpan Uang Tunai dan Menabung</td>
+                <td style="width: 25%;" id="1_7pengeluaran"></td>
+            </tr>
+            
+            <tr>
+                <td style="text-align: left; width: 25%;">2. Meminjam Uang</td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="2_7penerimaan" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 25%;">2. Membayar Hutang</td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="2_7pengeluaran" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: left; width: 25%;">3. Menerima Pembayaran Kredit Barang (Usaha Rumah Tangga)</td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="3_7penerimaan" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 25%;">3. Memberikan Kredit Barang (Usaha Rumah Tangga)</td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="3_7pengeluaran" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: left; width: 25%;">4. Kredit Barang</td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="4_7penerimaan" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 25%;">4. Membayar Kredit Barang</td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="4_7pengeluaran" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+            </tr>
+
+            <tr>
+                <td style="text-align: left; width: 25%;">5. Lainnya (Pengambilan Piutang, Menggadaikan Barang, Mendapat Arisan, Klaim Asuransi Jiwa/Pendidikan, dll)</td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="5_7penerimaan" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 25%;">5. Lainnya (Meminjam Uang, Menebus Barang, Gadaian, Membayar Arisan, Premi Asuransi Jiwa/Pendidikan, dll.)</td>
+                <td style="width: 25%;"><input type="text" class="value-input" id="5_7pengeluaran" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+            </tr>
+
+            <tr id="notifikasi_7">
+                <td colspan="4" style="text-align: center; border: 1px solid black; padding: 6px; background-color: #e49b9b;">
+                    <strong>Jika Perhitungan Muncul NaN, Mohon Isi Isian Yang Kosong</strong>
+                </td>
+            </tr>
+
+            <tr class="total" style="background-color: rgb(209, 208, 119);">
+                <td style="width: 25%; text-align: center; border: 1.5px solid black;"><strong>Jumlah</strong></td>
+                <td style="width: 25%; border: 1.5px solid black;" id="jumlah_7penerimaan"></td>
+                <td style="width: 25%; text-align: center; border: 1.5px solid black;"><strong>Jumlah</strong></td>
+                <td style="width: 25%; border: 1.5px solid black;" id="jumlah_7pengeluaran"></td>
+            </tr>
+            
+            <tr class="total" style="background-color: rgb(209, 208, 119);">
+                <td colspan="3" style="width: 25%; text-align: center; border: 1.5px solid black;"><strong>Selisih Transaksi Keuangan Rincian Pengeluaran dan Penerimaan [Jumlah Kolom (4) - Jumlah Kolom (2)]</strong></td>
+                <td style="width: 25%; border: 1.5px solid black;" id="selisih_7"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- <div class="btn-container">
+        <button class="btn-next" onclick="goBack()">
+            ← Back
+        </button>
+    </div>
+
+    <div class="btn-container">
+    <button class="btn-next"
+        onclick="window.location.href='https://lailatulhasanah31.github.io/kalkulator1905/'">
+        Menghitung Lagi
+    </button>
+</div> -->
+
+<script>
+    const rataPengeluaran = parseFloat(
+        localStorage.getItem("rata_pengeluaran")
+    ) || 0;
+
+    console.log("Rata Pengeluaran:", rataPengeluaran);
+    // Fungsi untuk memformat angka dengan pemisah ribuan
+    function formatNumber(value) {
+        if (isNaN(value) || value === null || value === '') return '';
+        const num = parseFloat(value);
+
+        // Format angka dengan pemisah ribuan dan koma desimal gaya Indonesia
+        return num.toLocaleString('id-ID', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    }
+
+    // Fungsi untuk menghapus format angka (mengembalikan hanya angka)
+    function unformatNumber(value) {
+        return value.replace(/\./g, '');
+    }
+
+    // Fungsi untuk memformat input dan menghitung total
+    function formatAndCalculate(input) {
+        // Hapus pemisah ribuan sebelum mengolah nilai
+        const rawValue = unformatNumber(input.value);
+
+        // Pastikan nilai adalah angka valid, jika tidak set ke 0
+        const numericValue = rawValue === '' ? '' : parseFloat(rawValue);
+
+        // Perbarui input dengan nilai yang diformat
+        input.value = formatNumber(numericValue);
+
+        // Hitung total semua input
+        calculateTotal();
+    }
+
+    function calculateTotal() {
+        // Ambil semua elemen input dengan class 'value-input'
+        const inputs = document.querySelectorAll('.value-input');
+        let pemerintah2 = 0;
+        let pemerintah3 = 0;
+        let pemerintah4 = 0;
+        let pemerintah5 = 0;
+        let total_terima_uang = 0;
+        let total_bayar_uang = 0;
+        let jumlah_7penerimaan_raw = 0;
+        let jumlah_6penerimaan = 0;
+        let jumlah_7pengeluaran_raw = 0;
+        let jumlah_6pengeluaran = 0;
+        let penerimaan16 = 0;
+        let penerimaan26 = 0;
+
+
+        // Loop melalui setiap input untuk menjumlahkan nilai pemasukan dan pengeluaran secara terpisah
+        inputs.forEach(input => {
+            const rawValue = unformatNumber(input.value); // Hapus format
+            const numericValue = parseFloat(rawValue); // Pastikan nilai valid
+
+            // Memeriksa apakah input ini untuk pemasukan atau pengeluaran berdasarkan ID
+            if (input.id.includes('6penerimaan')) {
+                jumlah_6penerimaan += numericValue; // Tambahkan ke total pengeluaran
+            } else if (input.id.includes('7penerimaan')) {
+                jumlah_7penerimaan_raw += numericValue; // Tambahkan ke total pengeluaran
+            } else if (input.id.includes('6pengeluaran')) {
+                jumlah_6pengeluaran += numericValue; // Tambahkan ke total pengeluaran
+            } else if (input.id.includes('7pengeluaran')) {
+                jumlah_7pengeluaran_raw += numericValue; // Tambahkan ke total pengeluaran
+            }
+
+            if (
+                input.id === '1a_terima_uang' ||
+                input.id === '1b_terima_uang'
+            ) {
+                pemerintah2 += numericValue;
+            } else if (
+                input.id === '1a_bayar_uang' ||
+                input.id === '1b_bayar_uang'
+            ) {
+                pemerintah4 += numericValue;
+            } else if (input.id === '1_6penerimaan') {
+                penerimaan16 += numericValue;
+            }  else if (input.id === '2_6penerimaan') {
+                penerimaan26 += numericValue;
+            } else if (input.id === 'total_terima_uang') {
+                total_terima_uang += numericValue;
+            } else if (input.id === 'total_bayar_uang') {
+                total_bayar_uang += numericValue;
+            }
+
+        });
+
+        const rataPengeluaranSetahun = rataPengeluaran*12;
+        console.log("Rata Pengeluaran Setahun:", rataPengeluaranSetahun);
+
+        // document.getElementById('total_terima_uang').textContent = formatNumber(total_terima_uang);
+        // document.getElementById('total_bayar_uang').textContent = formatNumber(total_bayar_uang);
+        // document.getElementById('1_pemerintah2').textContent = formatNumber(pemerintah2);
+        // document.getElementById('1_pemerintah4').textContent = formatNumber(pemerintah4);
+        document.getElementById('jumlah_6penerimaan').textContent = formatNumber(jumlah_6penerimaan);
+        document.getElementById('1_6pengeluaran').textContent = formatNumber(rataPengeluaranSetahun);
+
+        // Menghitung dan menampilkan selisih
+        document.getElementById('jumlah_6pengeluaran').textContent = formatNumber(jumlah_6pengeluaran);
+        const selisih_6 = jumlah_6penerimaan - jumlah_6pengeluaran;
+        document.getElementById('selisih_6').textContent = formatNumber(selisih_6);
+        const selisih_7 = selisih_6;
+        document.getElementById('selisih_7').textContent = formatNumber(selisih_7);
+        const pengeluaran_17 = total_terima_uang - total_bayar_uang + penerimaan16 + penerimaan26;
+        document.getElementById('1_7pengeluaran').textContent = formatNumber(pengeluaran_17);
+        const jumlah_7pengeluaran = jumlah_7pengeluaran_raw + pengeluaran_17;
+        document.getElementById('jumlah_7pengeluaran').textContent = formatNumber(jumlah_7pengeluaran);
+        const jumlah_7penerimaan = jumlah_7pengeluaran - selisih_7;
+        document.getElementById('jumlah_7penerimaan').textContent = formatNumber(jumlah_7penerimaan);
+        const penerimaan_17 = jumlah_7penerimaan - jumlah_7penerimaan_raw;
+        document.getElementById('1_7penerimaan').textContent = formatNumber(penerimaan_17);
+        // document.getElementById('rata_makanan').textContent = formatNumber(rataMakanan);
+
+        // ambil elemen notifikasi
+        const notifRow2 = document.getElementById('notifikasi_6');
+
+        // kalau semua sudah terisi, sembunyikan
+        if (!isNaN(selisih_6)) {
+            notifRow2.style.display = 'none';
+        } else {
+            notifRow2.style.display = ''; // tampil lagi kalau ada yang kosong
+        }
+
+        // ambil elemen notifikasi
+        const notifRow3 = document.getElementById('notifikasi_7');
+
+        // kalau semua sudah terisi, sembunyikan
+        if (!isNaN(selisih_7)) {
+            notifRow3.style.display = 'none';
+        } else {
+            notifRow3.style.display = ''; // tampil lagi kalau ada yang kosong
+        }
+    }
+
+    // Menambahkan event listener untuk pindah antar input saat menekan Enter
+    document.querySelectorAll('.value-input').forEach((input, index, inputs) => {
+        input.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Mencegah aksi default tombol Enter
+                const nextInput = inputs[index + 1]; // Ambil input berikutnya
+                if (nextInput) {
+                    nextInput.focus(); // Pindahkan fokus ke input berikutnya
+                }
+            }
+        });
+    });
+</script>
+
+
+<script>
+    // Fungsi untuk mengecek orientasi perangkat
+    function checkOrientation() {
+        const notification = document.getElementById('orientationNotification');
+
+        // Cek apakah orientasi portrait
+        if (window.innerHeight > window.innerWidth) {
+            notification.classList.add('show-notification');
+        } else {
+            notification.classList.remove('show-notification');
+        }
+    }
+
+    // Jalankan saat halaman dimuat dan setiap kali orientasi berubah
+    window.addEventListener('load', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+
+    // Panggil checkOrientation setiap kali ukuran jendela berubah
+    window.addEventListener('resize', checkOrientation);
+</script>
+
+<!-- <script>
+    function goBack() {
+        window.history.back();
+    }
+</script> -->
+
+
+<!-- <script> untuk neraca.html
+    const total = localStorage.getItem("total_pengeluaran");
+    console.log(total_pengeluaran);
+</script> -->
+
+</body>
+</html>
+
