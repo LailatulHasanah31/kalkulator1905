@@ -134,92 +134,72 @@
     <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
         <thead>
             <tr>
-                <th colspan="5" style="background-color: rgb(106, 106, 209);">Blok V.E. TRANSFER BERJALAN (SELAIN ASET) SELAMA SETAHUN TERAKHIR (DALAM RUPIAH)</th>
+                <th colspan="3" style="background-color: rgb(106, 106, 209);">Blok V.E. TRANSFER BERJALAN (SELAIN ASET) SELAMA SETAHUN TERAKHIR (DALAM RUPIAH)</th>
             </tr>
         </thead>
         <thead>
             <tr>
                 <th rowspan="2">Penerimaan</th>
-                <th colspan="2">Transfer Diterima (dari)</th>
-                <th colspan="2">Transfer Dibayar/Diberikan (kepada)</th>
+                <th>Transfer Diterima (dari)</th>
+                <th>Transfer Dibayar/Diberikan (kepada)</th>
             </tr>
             <tr>
                 <th>Uang</th>
-                <th>Barang/Jasa</th>
                 <th>Uang</th>
-                <th>Barang/Jasa</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>(1)</td>
                 <td>(2)</td>
-                <td>(3)</td>
                 <td>(4)</td>
-                <td>(5)</td>
             </tr>
             <tr>
-                <td style="text-align: left; width: 20%;">1. Pemerintahan (Rincian a+b)</td>
-                <td style="width: 20%;" id="1_pemerintah2"></td>
-                <td style="width: 20%;" id="1_pemerintah3"></td>
-                <td style="width: 20%;" id="1_pemerintah4"></td>
-                <td style="width: 20%;" id="1_pemerintah5"></td>
+                <td style="text-align: left; width: 33%;">1. Pemerintahan (Rincian a+b)</td>
+                <td style="width: 33%;" id="1_pemerintah2"></td>
+                <td style="width: 33%;" id="1_pemerintah4"></td>
             </tr>
             <tr>
-                <td style="text-align: left; padding-left: 3%; width: 20%;">a. Uang Pensiun</td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="1a_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%; background-color: grey;"></td>
-                <td style="width: 20%; background-color: grey;"></td>
-                <td style="width: 20%; background-color: grey;"></td>
+                <td style="text-align: left; padding-left: 3%; width: 33%;">a. Uang Pensiun</td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="1a_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="width: 33%; background-color: grey;"></td>
             </tr>
             <tr>
-                <td style="text-align: left; padding-left: 3%; width: 20%;">b. Bantuan Pemerintahan (BPJS PBI, BLT, PKH, BOS, dll) <br> Pembayaran Zakat ke BAZNAS</td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="1b_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="1b_terima_barang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="1b_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="1b_bayar_barang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; padding-left: 3%; width: 33%;">b. Bantuan Pemerintahan (BPJS PBI, BLT, PKH, BOS, dll) <br> Pembayaran Zakat ke BAZNAS</td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="1b_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="1b_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
             </tr>
             <tr>
-                <td style="text-align: left; width: 20%;">2. Badan Usaha (Klaim Asuransi Kesehatan/Kecelakaan/Kerugian, Penerimaan/Iuran Pensiun, dll.)</td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="2_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="2_terima_barang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="2_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="2_bayar_barang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 33%;">2. Badan Usaha (Klaim Asuransi Kesehatan/Kecelakaan/Kerugian, Penerimaan/Iuran Pensiun, dll.)</td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="2_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="2_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
             </tr>
             <tr>
-                <td style="text-align: left; width: 20%;">3. Rumah Tangga Lain</td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="3_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="3_terima_barang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="3_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="3_bayar_barang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 33%;">3. Rumah Tangga Lain</td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="3_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="3_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
             </tr>
             <tr>
-                <td style="text-align: left; width: 20%;">4. Lembaga Nirlaba (Sumbangan dari/ke Masjid, Gereja, Panti, dll.)</td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="4_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="4_terima_barang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="4_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="4_bayar_barang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 33%;">4. Lembaga Nirlaba (Sumbangan dari/ke Masjid, Gereja, Panti, dll.)</td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="4_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="4_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
             </tr>
             <tr>
-                <td style="text-align: left; width: 20%;">5. Luar Negeri (Kiriman dari/ke TKI, Sumbangan LSM Luar Negeri, dll.)</td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="5_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="5_terima_barang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="5_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
-                <td style="width: 20%;"><input type="text" class="value-input" id="5_bayar_barang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="text-align: left; width: 33%;">5. Luar Negeri (Kiriman dari/ke TKI, Sumbangan LSM Luar Negeri, dll.)</td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="5_terima_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
+                <td style="width: 33%;"><input type="text" class="value-input" id="5_bayar_uang" placeholder="" inputmode="numeric"pattern="[0-9]*" value="" oninput="formatAndCalculate(this)"></td>
             </tr>
 
             <tr id="notifikasi_transfer_berjalan">
-                <td colspan="5" style="text-align: center; border: 1px solid black; padding: 6px; background-color: #e49b9b;">
+                <td colspan="3" style="text-align: center; border: 1px solid black; padding: 6px; background-color: #e49b9b;">
                     <strong>Jika Perhitungan Muncul NaN, Mohon Isi Isian Yang Kosong</strong>
                 </td>
             </tr>
 
             <tr class="total" style="background-color: rgb(209, 208, 119);">
-                <td style="width: 20%; text-align: left; padding-left: 3%; border: 1.5px solid black;"><strong>Jumlah (Rincian 1+2+3+4+5)</strong></td>
-                <td style="width: 20%; border: 1.5px solid black;" id="total_terima_uang"></td>
-                <td style="width: 20%; border: 1.5px solid black;" id="total_terima_barang"></td>
-                <td style="width: 20%; border: 1.5px solid black;" id="total_bayar_uang"></td>
-                <td style="width: 20%; border: 1.5px solid black;" id="total_bayar_barang"></td>
+                <td style="width: 33%; text-align: left; padding-left: 3%; border: 1.5px solid black;"><strong>Jumlah (Rincian 1+2+3+4+5)</strong></td>
+                <td style="width: 33%; border: 1.5px solid black;" id="total_terima_uang"></td>
+                <td style="width: 33%; border: 1.5px solid black;" id="total_bayar_uang"></td>
             </tr>
         </tbody>
     </table>
@@ -391,7 +371,7 @@
 
     <div class="btn-container">
     <button class="btn-next"
-        onclick="window.location.href='https://contoh.com'">
+        onclick="window.location.href='https://lailatulhasanah31.github.io/kalkulator1905/'">
         Menghitung Lagi
     </button>
 </div>
@@ -461,12 +441,8 @@
             // Memeriksa apakah input ini untuk pemasukan atau pengeluaran berdasarkan ID
             if (input.id.includes('terima_uang')) {
                 total_terima_uang += numericValue; // Tambahkan ke total pemasukan
-            } else if (input.id.includes('terima_barang')) {
-                total_terima_barang += numericValue; // Tambahkan ke total pengeluaran
             } else if (input.id.includes('bayar_uang')) {
                 total_bayar_uang += numericValue; // Tambahkan ke total pengeluaran
-            } else if (input.id.includes('bayar_barang')) {
-                total_bayar_barang += numericValue; // Tambahkan ke total pengeluaran
             } else if (input.id.includes('6penerimaan')) {
                 jumlah_6penerimaan += numericValue; // Tambahkan ke total pengeluaran
             } else if (input.id.includes('7penerimaan')) {
@@ -483,20 +459,10 @@
             ) {
                 pemerintah2 += numericValue;
             } else if (
-                input.id === '1a_terima_barang' ||
-                input.id === '1b_terima_barang'
-            ) {
-                pemerintah3 += numericValue;
-            } else if (
                 input.id === '1a_bayar_uang' ||
                 input.id === '1b_bayar_uang'
             ) {
                 pemerintah4 += numericValue;
-            } else if (
-                input.id === '1a_bayar_barang' ||
-                input.id === '1b_bayar_barang'
-            ) {
-                pemerintah5 += numericValue;
             } else if (input.id === '1_6penerimaan') {
                 penerimaan16 += numericValue;
             }  else if (input.id === '2_6penerimaan') {
@@ -509,13 +475,9 @@
         console.log("Rata Pengeluaran Setahun:", rataPengeluaranSetahun);
 
         document.getElementById('total_terima_uang').textContent = formatNumber(total_terima_uang);
-        document.getElementById('total_terima_barang').textContent = formatNumber(total_terima_barang);
         document.getElementById('total_bayar_uang').textContent = formatNumber(total_bayar_uang);
-        document.getElementById('total_bayar_barang').textContent = formatNumber(total_bayar_barang);
         document.getElementById('1_pemerintah2').textContent = formatNumber(pemerintah2);
-        document.getElementById('1_pemerintah3').textContent = formatNumber(pemerintah3);
         document.getElementById('1_pemerintah4').textContent = formatNumber(pemerintah4);
-        document.getElementById('1_pemerintah5').textContent = formatNumber(pemerintah5);
         document.getElementById('jumlah_6penerimaan').textContent = formatNumber(jumlah_6penerimaan);
         document.getElementById('1_6pengeluaran').textContent = formatNumber(rataPengeluaranSetahun);
 
